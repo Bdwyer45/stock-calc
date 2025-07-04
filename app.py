@@ -4,6 +4,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return "✅ Stock Calculator API is running! Use /calculate with ticker, amount, and date."
+
 @app.route('/calculate')
 def calculate():
     ticker = request.args.get("ticker")
