@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Return Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+    }
+    #result {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Stock Return Calculator</h2>
+  <label>Stock Symbol: <input id="symbol" /></label>
+  <label>Amount Invested ($): <input id="amount" type="number" /></label>
+  <label>Purchase Date: <input id="date" type="date" /></label>
+  <button onclick="calculate()">Calculate</button>
+  <div id="result"></div>
+
+  <script>
+    async function calculate() {
+      const symbol = document.getElementById('symbol').value.toUpperCase();
+      const amount = parseFloat(document.getElementById('amount').value);
+      const date = document.getElementById('date').value;
+
+      const response = await fetch(`https://your-api-url.com/api?symbol=${symbol}&amount=${amount}&date=${date}`);
+      const data = await response.json();
+      document.getElementById('result').innerText = data.message || JSON.stringify(data);
+    }
+  </script>
+</body>
+</html>
