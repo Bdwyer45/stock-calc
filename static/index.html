@@ -35,7 +35,7 @@
       const amount = parseFloat(document.getElementById('amount').value);
       const date = document.getElementById('date').value;
 
-      const response = await fetch(`https://your-api-url.com/api?symbol=${symbol}&amount=${amount}&date=${date}`);
+      const response = await fetch(`https://stock-calc.onrender.com/calculate?ticker=${symbol}&amount=${amount}&date=${date}`);
       const data = await response.json();
       document.getElementById('result').innerText = data.message || JSON.stringify(data);
     }
