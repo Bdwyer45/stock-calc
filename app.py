@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 import yfinance as yf
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -8,11 +7,11 @@ app = Flask(__name__)
 def home():
     return "✅ Stock Calculator API is running! Use /calculate with ticker, amount, and date."
 
-@app.route('/calculate')
+@app.route('/calculate', methods=["POST"])
 def calculate():
-    ticker = request.args.get("ticker")
-    amount = float(request.args.get("amount"))
-    date_str = request.args.get("date")
+    ticker = request.form.get("symbol")
+    amount = float(request.form.get("amount"))
+    date_str = request.form.get("date")
 
     stock = yf.Ticker(ticker)
     hist = stock.history(start=date_str)
