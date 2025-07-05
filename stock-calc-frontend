@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Return Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+    }
+    #result {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Stock Return Calculator</h2>
+  <label>Ticker Symbol:</label>
+  <input type="text" id="ticker" placeholder="e.g. AAPL" value="AAPL" />
+
+  <label>Amount Invested ($):</label>
+  <input type="number" id="amount" value="1000" />
+
+  <label>Start Date:</label>
+  <input type="date" id="date" value="2022-01-01" />
+
+  <button onclick="calculate()">Calculate Return</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function calculate() {
+      const ticker = document.getElementById('ticker').value;
+      const amount = document.getElementById('amount').value;
+      const date = document.getElementById('date').value;
+
+      const url = `https://stock-calc.onrender.com/calculate?ticker=${ticker}&amount=${amount}&date=${date}`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('result').textContent = 'Error: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
